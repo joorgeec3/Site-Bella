@@ -2,13 +2,13 @@
 
 @layer base {
   :root {
-    --color-chocolate: #261511;
-    --color-chocolate-dark: #241209;
-    --color-cream: #f2f0e5;
-    --color-peach: #ffd9a8;
-    --color-peach-light: #fadfca;
-    --color-pistachio: #dddcb0;
-    --color-bronze: #543923;
+    --color-chocolate: #372629;
+    --color-chocolate-dark: #302025;
+    --color-cream: #fff8f6;
+    --color-peach: #d6929e;
+    --color-peach-light: #f5e0e3;
+    --color-pistachio: #f0bcc7;
+    --color-bronze: #704951;
   }
 
   html {
@@ -17,8 +17,8 @@
   }
 
   body {
-    background-color: #261511;
-    color: #f2f0e5;
+    background-color: #372629;
+    color: #fff8f6;
     overflow-x: hidden;
   }
 }
@@ -38,14 +38,14 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #261511;
+  background: #372629;
 }
 ::-webkit-scrollbar-thumb {
-  background: #543923;
+  background: #704951;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ffd9a8;
+  background: #d6929e;
 }
 
 /* Noise overlay */
@@ -57,3 +57,30 @@
   pointer-events: none;
 }
 
+
+:focus-visible {
+  outline: 2px solid #f0bcc7;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .floating-petal-item { width: 210px; height: 210px; }
+  .floating-petal-item > button { width: 210px; height: 210px; padding: 1rem; }
+  .floating-petal-item > button > span { max-width: 155px; }
+  .floating-petal-item > button > span > span:first-child { font-size: 20px; }
+  .floating-petal-item:nth-child(1) { left: 34% !important; top: 23% !important; }
+  .floating-petal-item:nth-child(2) { left: 67% !important; top: 42% !important; }
+  .floating-petal-item:nth-child(3) { left: 34% !important; top: 61% !important; }
+  .floating-petal-item:nth-child(4) { left: 67% !important; top: 77% !important; }
+  .floating-petal-item:nth-child(5) { left: 50% !important; top: 33% !important; }
+}

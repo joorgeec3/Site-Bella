@@ -1,0 +1,56 @@
+# Relatório de implementação — Bella Beauty Brazil
+
+**Repositório:** `joorgeec3/Site-Bella`  
+**Branch de trabalho:** `feature/bella-beauty-brazil`  
+**Estado:** implementação e preview compilados; não foi publicado em produção.
+
+## O que foi feito
+
+- Mantido o projeto importado, sem troca de template: continuam a homepage, fotos já presentes, seções, Bento Grid, fontes **Bodoni Moda + Manrope**, quatro cards principais e cinco cards em forma de pétala.
+- Atualizada a identidade para Bella Beauty Brazil, de Livia Rego; conteúdo em inglês australiano (`en-AU`), endereço **Suite 3, 412 Logan Road, Greenslopes, QLD 4120, Australia**, telefone **+61 402 148 437** e e-mail **livia.anjos14@gmail.com**. O logo oficial foi otimizado para uso web e recebeu fundo de contraste no header.
+- Preservados os dez serviços pedidos: Nano Strokes, Microblading, Shadow / Hybrid Brows, Lip Blush, Brow Sculpting & Tint, Brow Lamination, Lash Lift, Facial Treatments, Waxing e Training & Courses.
+- Corrigido o menu desktop para que clique e hover não se cancelem. Menu mobile, sliders, FAQ e formulários usam controles acessíveis; a validação do formulário não cria um agendamento local.
+- Todos os CTAs de reserva e chamadas de `window.open` testados resolvem diretamente para `https://bellabrazil.gettimely.com/`. Nenhuma reserva real foi aberta ou submetida durante os testes.
+- Criadas páginas individuais para os dez serviços e para **About Me**, **Gallery & Reviews**, **Contact & Book** e **Courses**. Foram reutilizadas fotos publicadas pela própria empresa. Cuidados de Microblading, Lip Tattoo, Brow Lamination e Lash Lift remetem ao material oficial aplicável; o restante evita instruções clínicas não publicadas.
+- Reviews: usada somente uma avaliação textual publicada, atribuída à cliente indicada pela fonte; nenhuma nota ou depoimento adicional foi inventado.
+- Acrescentados `title`, descrições, canonical, páginas estáticas por rota, sitemap com **17** URLs canônicas, `robots.txt`, `llms.txt`, JSON-LD local/serviço/FAQ e links internos. As localidades do briefing foram incluídas sem criar páginas duplicadas por bairro. Rotas legadas mantêm aliases com canonical; a regra 301 do servidor continua dependente do host de produção.
+- Arquivo oficial do logo reduzido de 480 × 540 para 228 × 256 px (~49 KB); fotos do homepage decodificadas após lazy-load.
+
+## Animações e comparação visual
+
+- **Pétalas:** as cinco trajetórias GSAP/ScrollTrigger têm posições horizontais diferentes; cada card cruza a janela da foto e sobe para fora do topo em sequência. O teste percorreu a entrada e saída em amostras densas e voltou pelos mesmos pontos: a posição e os masks foram reproduzidos ao reverter o scroll.
+- **Our Approach:** a imagem foi mascarada em duas metades com `clip-path`. Uma faixa clara e a máscara do título expandem com polígonos simétricos a partir do centro; assim, a progressão intermediária apresenta Our Approach antes do final da cena, ao contrário do antigo movimento assimétrico. Ambos respondem ao scrub e revertem no scroll.
+- Conferidos frames relevantes da gravação anexada e inspecionados screenshots Chromium durante o estado intermediário. O modo `prefers-reduced-motion` remove a espera sticky de 500vh.
+
+## Verificações realizadas
+
+| Verificação | Resultado |
+|---|---|
+| `npm run lint` (TypeScript) | Passou |
+| `npm run build` + prerender | Passou; gerou 22 arquivos de rota |
+| Dez rotas de serviço | H1, title, descrição e canonical conferidos |
+| Sitemap/robots/llms | sitemap com 17 URLs; `robots.txt` e `llms.txt` presentes |
+| Desktop/mobile | Menu e links testados; sem overflow horizontal a 320, 390, 768, 1024 e 1280 px |
+| CTA de reserva | URL exata conferida, incluindo header desktop/mobile e hero; abertura capturada sem navegar para a agenda |
+| Contact & Book | Campos obrigatórios, e-mail inválido/válido e presença do mapa testados; formulário **não** foi enviado |
+| Google Maps | O iframe redirecionou para `www.google.com/maps/embed`; recursos do Maps carregaram no preview |
+| Slider/FAQ | Avanço do slider medido e acordeão expandido com `aria-expanded` |
+| Cena scroll | Cinco cards visíveis em janelas próprias e posições distintas; foto simétrica, faixa central/título sincronizados; caminho de ida e volta conferido |
+| Fotos/console | 17 imagens decodificadas no homepage; sem erro de console JavaScript ou erro de página nos testes finais |
+| Movimento reduzido | Preferência respeitada sem pausa sticky artificial |
+
+## Pendente / limitações antes de produção
+
+1. **Publicação e merge** não foram feitos. O preview atual é temporário: [abrir preview do sandbox](https://4173-i9xja1dwu9rc65jer456m-96609d97.us1.manus.computer/).
+2. **301**: os aliases e canonicals antigos foram mantidos para o build, mas não existe regra do servidor aplicada enquanto o host de produção não for definido.
+3. **Performance**: o build gera CSS de 58,35 KB (~10,13 KB gzip) e JavaScript de 575,18 KB minificado (~180,32 KB gzip). Vite ainda avisa que o chunk JS ultrapassa 500 KB bruto. A compilação é válida; divisão adicional por rota pode ser considerada antes de produção.
+4. Não foi executado Lighthouse nem uma auditoria dedicada de screen reader/WCAG. Os testes de responsividade, foco visível e `prefers-reduced-motion` não substituem essa etapa.
+5. Não há preços, horários, certificações ou detalhes curriculares inventados. Confirmar esses dados diretamente com a empresa antes de eventualmente publicá-los.
+
+## Fontes registradas
+
+- [Site oficial Bella Beauty Brazil](https://www.bellabeautybrazil.com.au/)
+- [Serviços e reservas atuais no Timely](https://bellabrazil.gettimely.com/)
+- [Guia oficial de cuidados pós-tratamento](https://www.bellabeautybrazil.com.au/_files/ugd/26620d_2df1062d732e44f2af7e3ce4284b53dd.pdf)
+- [Referência de layout/rotação visual](https://oriatemplate.framer.website/)
+- Mais detalhes e limites das fontes: [`CONTENT_SOURCES.md`](./CONTENT_SOURCES.md)

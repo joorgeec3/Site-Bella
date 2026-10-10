@@ -1,46 +1,43 @@
-export interface TreatmentItem {
-  name: string;
-  price: string;
-  description?: string;
-  duration?: string;
-}
-
-export interface ServiceDetail {
+export interface HomeServiceCard {
   id: string;
   slug: string;
   title: string;
   subtitle: string;
-  startingPrice: string;
-  heroImage: string;
   number: string;
-  tagline: string;
-  whyLoveTitle: string;
-  whyLoveDescription: string;
-  approachTitle: string;
-  approachDescription: string;
-  treatments: TreatmentItem[];
-  benefits: {
-    title: string;
-    description: string;
-  }[];
-  galleryImages: string[];
+  heroImage: string;
 }
 
-export interface TeamMember {
+export interface TechniqueComparison {
   name: string;
-  role: string;
-  image: string;
+  description: string;
+}
+
+export interface ServicePageData {
+  slug: string;
+  title: string;
+  category: string;
+  subtitle: string;
+  intro: string;
+  heroImage: string;
+  galleryImages: string[];
+  comparisonTitle: string;
+  comparisonIntro: string;
+  techniques: TechniqueComparison[];
+  aftercare: string;
+  aftercareUrl?: string;
+  faqs: FAQItem[];
 }
 
 export interface TestimonialItem {
   id: string;
+  cardType: 'review' | 'image' | 'link';
   quote?: string;
   text?: string;
   author?: string;
   tag?: string;
   number?: string;
   image?: string;
-  isImageCard?: boolean;
+  sourceUrl?: string;
 }
 
 export interface FAQItem {
