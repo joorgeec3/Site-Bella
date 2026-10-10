@@ -4,7 +4,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import App from '../src/App.tsx';
 import { businessStructuredData, canonicalForRoute, SITE_ORIGIN, SITE_ROUTES } from '../src/data/routes.ts';
-import { SERVICE_PAGES } from '../src/data/siteData.ts';
+import { COURSE_OPTIONS, SERVICE_PAGES, STUDIO_INFO } from '../src/data/siteData.ts';
 
 const distDir = join(process.cwd(), 'dist');
 const shell = await readFile(join(distDir, 'index.html'), 'utf8');
@@ -24,7 +24,8 @@ const buildStructuredData = (path: string, route: (typeof SITE_ROUTES)[number] |
     inLanguage: 'en-AU',
     isPartOf: { '@type': 'WebSite', name: 'Bella Beauty Brazil', url: `${SITE_ORIGIN}/` },
   }];
-  const service = path.startsWith('/services/') ? SERVICE_PAGES.find((item) => path === `/services/${item.slug}`) : undefined;
+
+  const service = path.startsWith('/services/') ? SERVICE_PAGES.find((item) => path === `/services/${item.slug}` && item.slug !== 'training-courses') : undefined;
   if (service) {
     schemas.push({
       '@context': 'https://schema.org',
@@ -32,9 +33,16 @@ const buildStructuredData = (path: string, route: (typeof SITE_ROUTES)[number] |
       name: service.title,
       serviceType: service.category,
       description: service.subtitle,
-      provider: { '@type': 'BeautySalon', name: 'Bella Beauty Brazil', url: `${SITE_ORIGIN}/` },
+      provider: { '@type': 'BeautySalon', name: STUDIO_INFO.name, url: `${SITE_ORIGIN}/` },
       areaServed: businessStructuredData.areaServed,
       url: canonical,
+      ...(service.priceOptions?.length ? { offers: service.priceOptions.map((option) => ({
+        '@type': 'Offer',
+        name: option.label,
+        price: String(option.amount),
+        priceCurrency: 'AUD',
+        url: STUDIO_INFO.bookingUrl,
+      })) } : {}),
     });
     schemas.push({
       '@context': 'https://schema.org',
@@ -42,6 +50,25 @@ const buildStructuredData = (path: string, route: (typeof SITE_ROUTES)[number] |
       mainEntity: service.faqs.map((faq) => ({
         '@type': 'Question', name: faq.question,
         acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    });
+  }
+
+  if (path === '/courses' || path === '/services/training-courses') {
+    schemas.push({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Bella Beauty Brazil — Training & Courses',
+      numberOfItems: COURSE_OPTIONS.length,
+      itemListElement: COURSE_OPTIONS.map((course, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Course',
+          name: course.title,
+          provider: { '@type': 'BeautySalon', name: STUDIO_INFO.name },
+          offers: { '@type': 'Offer', price: String(course.amount), priceCurrency: 'AUD', url: STUDIO_INFO.bookingUrl },
+        },
       })),
     });
   }

@@ -17,7 +17,20 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ slug, onOp
       <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-12 sm:py-16">
         <button onClick={() => onNavigate('/')} className="mb-8 inline-flex items-center gap-2 text-xs font-sans-ui uppercase tracking-widest text-[#f0bcc7] hover:text-[#fff8f6]"><ArrowLeft size={14} />Bella Beauty Brazil</button>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-6 space-y-6"><span className="px-3 py-1 rounded-full text-xs font-sans-ui bg-[#fff8f6]/10 text-[#f0bcc7] border border-[#f0bcc7]/30">{service.category}</span><h1 className="font-serif-editorial text-4xl sm:text-6xl md:text-7xl tracking-tight leading-[1.08]">{service.title}</h1><p className="font-sans-ui text-base sm:text-lg text-[#fff8f6]/80 leading-relaxed max-w-xl">{service.subtitle}</p><button onClick={onOpenBooking} className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#fff8f6] text-[#372629] font-sans-ui text-xs font-semibold tracking-wider uppercase hover:bg-[#d6929e] transition-all duration-300 shadow-xl"><Calendar size={14} />Book on Timely</button></div>
+          <div className="lg:col-span-6 space-y-6">
+            <span className="px-3 py-1 rounded-full text-xs font-sans-ui bg-[#fff8f6]/10 text-[#f0bcc7] border border-[#f0bcc7]/30">{service.category}</span>
+            <h1 className="font-serif-editorial text-4xl sm:text-6xl md:text-7xl tracking-tight leading-[1.08]">{service.title}</h1>
+            <p className="font-sans-ui text-base sm:text-lg text-[#fff8f6]/80 leading-relaxed max-w-xl">{service.subtitle}</p>
+            {service.priceOptions?.length ? <div className="rounded-3xl border border-[#704951]/50 bg-[#2b1b20] p-5 sm:p-6">
+              <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2"><h2 className="font-sans-ui text-[10px] font-semibold uppercase tracking-[0.18em] text-[#f0bcc7]">Current Timely prices · AUD</h2><span className="font-sans-ui text-[10px] text-[#fff8f6]/50">Checked 10 October 2026</span></div>
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">{service.priceOptions.map((option) => <div key={option.label} className="flex items-start justify-between gap-3 rounded-2xl bg-[#372629] px-4 py-3.5">
+                <div><p className="font-sans-ui text-xs font-medium leading-5 text-[#fff8f6]">{option.label}</p>{option.duration && <p className="mt-1 font-sans-ui text-[10px] text-[#fff8f6]/55">{option.duration}</p>}</div>
+                <span className="shrink-0 font-sans-ui text-sm font-semibold text-[#f0bcc7]">A${option.amount.toLocaleString('en-AU')}</span>
+              </div>)}</div>
+              <p className="mt-4 font-sans-ui text-[10px] leading-5 text-[#fff8f6]/55">Please check Timely for current availability and any price changes.</p>
+            </div> : null}
+            <button onClick={onOpenBooking} className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#fff8f6] text-[#372629] font-sans-ui text-xs font-semibold tracking-wider uppercase hover:bg-[#d6929e] transition-all duration-300 shadow-xl"><Calendar size={14} />Book on Timely</button>
+          </div>
           <div className="lg:col-span-6"><div className="rounded-[32px] overflow-hidden aspect-[4/5] max-h-[680px] shadow-2xl border border-[#704951]/30 relative group"><img src={service.heroImage} alt={`Bella Beauty Brazil official website image accompanying ${service.title}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" fetchPriority="high" /><div className="absolute inset-0 bg-gradient-to-t from-[#372629]/35 via-transparent to-transparent" /></div></div>
         </div>
       </section>

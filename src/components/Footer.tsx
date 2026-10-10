@@ -40,7 +40,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div className="space-y-4">
             <h2 className="font-sans-ui text-xs uppercase tracking-widest text-[#372629]/65 font-semibold">Services</h2>
             <ul className="space-y-2 text-sm font-sans-ui text-[#372629]/85">
-              {SERVICE_PAGES.map((service) => <li key={service.slug}><button onClick={() => handleLinkClick(`/services/${service.slug}`)} className="text-left hover:underline underline-offset-4">{service.title}</button></li>)}
+              {SERVICE_PAGES.filter((service) => service.slug !== 'training-courses').map((service) => <li key={service.slug}><button onClick={() => handleLinkClick(`/services/${service.slug}`)} className="text-left hover:underline underline-offset-4">{service.title}</button></li>)}
             </ul>
           </div>
 

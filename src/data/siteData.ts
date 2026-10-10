@@ -104,15 +104,17 @@ export const SERVICE_PAGES: ServicePageData[] = [
     subtitle: 'Manual, fine hair-like brow strokes with service details published on Timely.',
     intro: 'Bella Beauty Brazil’s Timely listing describes Microblading as a manual technique that creates fine, hair-like strokes. It also lists a follow-up touch-up service. Confirm current availability and the details for your appointment on Timely.',
     heroImage: officialImages.cosmeticTattoo, galleryImages: [officialImages.cosmeticTattoo, officialImages.brows, officialImages.results],
+    priceOptions: [{ label: 'Perfect Brows — Microblading', amount: 615, duration: '2 hours, 30 mins' }],
     comparisonTitle: 'Microblading, Nano Strokes or Hybrid Brows?', comparisonIntro: 'These options differ in how the brow look is created. A consultation with Livia is the right place to discuss your brows and preferences.', techniques: browTechniqueComparison,
     aftercare: 'The official Bella Beauty Brazil aftercare sheet gives Microblading-specific guidance. Read it before your appointment and follow Livia’s instructions for your own treatment.', aftercareUrl: STUDIO_INFO.aftercareUrl,
     faqs: serviceFaqs.brows,
   },
   {
-    slug: 'shadow-hybrid-brows', title: 'Shadow / Hybrid Brows', category: 'Cosmetic Tattooing',
+    slug: 'shadow-hybrid-brows', title: 'Shadow / Hybrid Brows', category: 'Brows',
     subtitle: 'Brow shaping and colour options, with the finish discussed before treatment.',
     intro: 'The Timely menu describes Hybrid Brows as a shaped brow finished with a gel dye that colours the brow hairs and temporarily stains the skin. Ask Livia how this compares with a soft shadow effect and which service name matches the result you have in mind.',
     heroImage: officialImages.brows, galleryImages: [officialImages.brows, officialImages.cosmeticTattoo, officialImages.results],
+    priceOptions: [{ label: 'Brow Sculpt & Hybrid Brow', amount: 79, duration: '40 mins' }],
     comparisonTitle: 'Compare brow techniques', comparisonIntro: 'Understand the broad difference between fine strokes, manual strokes and temporary colour before choosing.', techniques: browTechniqueComparison,
     aftercare: 'Follow the care advice provided for the specific brow service you book. The linked care sheet is the official Bella Beauty Brazil guide for treatments including Microblading and Brow Lamination.', aftercareUrl: STUDIO_INFO.aftercareUrl,
     faqs: serviceFaqs.brows,
@@ -122,6 +124,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
     subtitle: 'Semi-permanent lip colour designed to enhance the natural lip tone.',
     intro: 'Bella Beauty Brazil describes Lip Blush as semi-permanent cosmetic tattooing for the lips. The colour settles as the lips heal, so the final appearance is not the same as the fresh treatment result. Discuss your preferred tone and the published touch-up information with Livia before booking.',
     heroImage: officialImages.lips, galleryImages: [officialImages.lips, officialImages.results, officialImages.cosmeticTattoo],
+    priceOptions: [{ label: 'Lip Blushing — semi-permanent makeup', amount: 615, duration: '2 hours, 30 mins' }],
     comparisonTitle: 'Lip Blush and everyday lip colour', comparisonIntro: 'Lip Blush is a semi-permanent service; lipstick is a temporary makeup choice. They are different options for adding colour, and a consultation can clarify the process and aftercare.',
     techniques: [
       { name: 'Lip Blush', description: 'A semi-permanent cosmetic tattoo service listed by Bella Beauty Brazil.' },
@@ -136,10 +139,15 @@ export const SERVICE_PAGES: ServicePageData[] = [
     ],
   },
   {
-    slug: 'brow-sculpting-tint', title: 'Brow Sculpting & Tint', category: 'Brows & Lashes',
+    slug: 'brow-sculpting-tint', title: 'Brow Sculpting & Tint', category: 'Brows',
     subtitle: 'Brow mapping and shaping with an optional tint to define the natural brow.',
     intro: 'The Timely listing describes Brow Sculpt as a personalised appointment that considers facial expression, symmetry, hair colour and hair type, with mapping, waxing, trimming and tweezing. A tint can be added when you want more visible colour.',
     heroImage: officialImages.brows, galleryImages: [officialImages.brows, officialImages.cosmeticTattoo, officialImages.results],
+    priceOptions: [
+      { label: 'Brow Sculpt Signature', amount: 56, duration: '25 mins' },
+      { label: 'Brow Sculpt & Tint', amount: 76, duration: '35 mins' },
+      { label: 'Brow Sculpt & Hybrid Brow', amount: 79, duration: '40 mins' },
+    ],
     comparisonTitle: 'Brow Sculpt, Tint and Hybrid Brow', comparisonIntro: 'Sculpting defines the shape, while tint and Hybrid Brow services add colour in different ways. The current Timely descriptions help you compare them.',
     techniques: [
       { name: 'Brow Sculpt', description: 'Mapping, waxing, trimming and tweezing to shape brows for the individual face.' },
@@ -150,10 +158,14 @@ export const SERVICE_PAGES: ServicePageData[] = [
     faqs: serviceFaqs.general,
   },
   {
-    slug: 'brow-lamination', title: 'Brow Lamination', category: 'Brows & Lashes',
+    slug: 'brow-lamination', title: 'Brow Lamination', category: 'Brows',
     subtitle: 'A brow-shaping service that sets the hairs in a brushed and sculpted direction.',
     intro: 'Bella Beauty Brazil describes Brow Lamination as a service that straightens and sets brow hairs, with shaping and tint available in the listed combination. Timely says results commonly last 6–8 weeks, depending on individual hair growth.',
     heroImage: officialImages.brows, galleryImages: [officialImages.brows, officialImages.results, officialImages.cosmeticTattoo],
+    priceOptions: [
+      { label: 'Brow Lamination, Shape and Tint', amount: 133, duration: '1 hour' },
+      { label: 'Brow Lamination (only)', amount: 90 },
+    ],
     comparisonTitle: 'Brow Lamination, Sculpt and Hybrid Brow', comparisonIntro: 'These services focus on different parts of brow styling: hair direction, shape, or added colour.',
     techniques: [
       { name: 'Brow Lamination', description: 'Straightens and sets brow hairs; the listed combination can include shape and tint.' },
@@ -168,11 +180,16 @@ export const SERVICE_PAGES: ServicePageData[] = [
     ],
   },
   {
-    slug: 'lash-lift', title: 'Lash Lift', category: 'Brows & Lashes',
+    slug: 'lash-lift', title: 'Lash Lift', category: 'Lashes',
     subtitle: 'A lift and curl for natural lashes, with tint listed as an optional combination.',
     intro: 'Bella Beauty Brazil’s Timely description says a Lash Lift shapes natural lashes from the root using silicone pads. Tint is available in a listed combination. Timely notes a typical 6–8 week result; individual lash cycles vary.',
     heroImage: officialImages.lashes, galleryImages: [officialImages.lashes, officialImages.brows, officialImages.results],
-    comparisonTitle: 'Lash Lift and Lash Lift with Tint', comparisonIntro: 'The lift creates the curl; a tint adds colour to the natural lashes. Confirm which option is listed for the appointment you want.',
+    priceOptions: [
+      { label: 'Lash Lifting & Tint', amount: 133, duration: '1 hour, 10 mins' },
+      { label: 'Classic EyeLashes', amount: 145 },
+      { label: 'Hybrid EyeLashes', amount: 175 },
+    ],
+    comparisonTitle: 'Current lash menu options', comparisonIntro: 'The Timely menu lists a Lash Lift and tint combination alongside Classic EyeLashes and Hybrid EyeLashes appointments. Confirm the technique and suitability with Livia before choosing.',
     techniques: [
       { name: 'Lash Lift', description: 'Lifts and curls natural lashes from the root, as described on Timely.' },
       { name: 'Lash Lift & Tint', description: 'Pairs the lift with tint to darken the natural lashes.' },
@@ -186,10 +203,16 @@ export const SERVICE_PAGES: ServicePageData[] = [
     ],
   },
   {
-    slug: 'facial-treatments', title: 'Facial Treatments', category: 'Skin Treatments',
+    slug: 'facial-treatments', title: 'Facial Treatments', category: 'Facials',
     subtitle: 'A facial appointment with service details confirmed on the current booking page.',
     intro: 'The Bella Beauty Brazil Timely menu describes a facial that includes cleansing, serums, a peel, extractions and a jelly mask. Ask Livia about the steps and suitability for your skin before booking.',
     heroImage: officialImages.facial, galleryImages: [officialImages.facial, officialImages.results, officialImages.lips],
+    priceOptions: [
+      { label: 'Dermaplaning', amount: 140, duration: '55 mins' },
+      { label: 'Micro Needling', amount: 185, duration: '1 hour' },
+      { label: 'Facial Spa', amount: 150, duration: '1 hour, 20 mins' },
+      { label: 'Deluxe Facial', amount: 360, duration: '1 hour, 50 mins' },
+    ],
     comparisonTitle: 'Facial Treatments and other services', comparisonIntro: 'A facial focuses on a skin-care appointment. Brow and lip cosmetic tattooing are separate services with different processes and aftercare.',
     techniques: [
       { name: 'Facial Treatment', description: 'The Timely service description lists cleansing, serums, a peel, extractions and a jelly mask.' },
@@ -200,10 +223,11 @@ export const SERVICE_PAGES: ServicePageData[] = [
     faqs: serviceFaqs.general,
   },
   {
-    slug: 'waxing', title: 'Waxing', category: 'Skin Treatments',
+    slug: 'waxing', title: 'Waxing', category: 'Waxing',
     subtitle: 'Waxing appointments for the areas listed in the current Timely service menu.',
     intro: 'Bella Beauty Brazil’s booking menu includes brow and body waxing options. Choose the area from the current Timely list and contact Livia if you need help selecting a service.',
     heroImage: officialImages.waxing, galleryImages: [officialImages.waxing, officialImages.facial, officialImages.brows],
+    priceOptions: [{ label: 'Brazilian Waxing', amount: 82, duration: '30 mins' }],
     comparisonTitle: 'Waxing and brow-shaping options', comparisonIntro: 'The right listing depends on the area and finish you want. The Timely menu separates brow sculpting from other waxing services.',
     techniques: [
       { name: 'Brow Sculpt', description: 'Mapping, waxing, trimming and tweezing to shape the brows.' },
@@ -214,7 +238,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
     faqs: serviceFaqs.general,
   },
   {
-    slug: 'training-courses', title: 'Training & Courses', category: 'Education',
+    slug: 'training-courses', title: 'Training & Courses', category: 'Courses',
     subtitle: 'Ask Livia about current training and course information before making plans.',
     intro: 'Training & Courses is listed on Bella Beauty Brazil’s official services page. Contact Livia to confirm the current course topics, format, prerequisites, dates and fees; those details are not published here.',
     heroImage: officialImages.courses, galleryImages: [officialImages.courses, officialImages.cosmeticTattoo, officialImages.brows],
@@ -223,11 +247,18 @@ export const SERVICE_PAGES: ServicePageData[] = [
     aftercare: 'Aftercare is specific to the service technique. The linked official sheet covers selected procedures; confirm the relevant guide with Livia for the course or treatment you have in mind.', aftercareUrl: STUDIO_INFO.aftercareUrl,
     faqs: [
       { question: 'What courses are currently available?', answer: 'Training & Courses is listed on the official services page. Contact Livia to confirm current course topics and availability.' },
-      { question: 'Are course dates or fees shown here?', answer: 'No course dates or fees are published on this page. Ask Livia for the current information before booking.' },
+      { question: 'Where can I check current course dates and details?', answer: 'Timely lists current course fees and durations. Confirm availability, prerequisites and any changes directly with Livia before booking.' },
       ...serviceFaqs.general,
     ],
   },
 ];
+
+export const COURSE_OPTIONS = [
+  { title: 'Lash Lift Course 1:1', duration: '8 hours', amount: 950 },
+  { title: 'Brow Lamination Course 1:1', duration: '8 hours, 5 mins', amount: 950 },
+  { title: 'Classic Eyelashes Extensions Course 1:1', duration: '6 hours, 30 mins', amount: 1400 },
+  { title: 'Microblading Course (Nano Strokes)', duration: '16 hours', amount: 4200 },
+] as const;
 
 export const TESTIMONIALS: TestimonialItem[] = [
   {

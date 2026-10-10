@@ -4,6 +4,7 @@ export interface HomePhoto {
   alt: string;
   width: number;
   height: number;
+  category?: 'Brows' | 'Cosmetic Tattoo' | 'Lashes' | 'Skin' | 'Studio';
 }
 
 export const LIVIA_PORTRAIT: HomePhoto = {
@@ -23,6 +24,7 @@ export const HOME_WORK_PHOTOS: HomePhoto[] = [
     alt: 'A lip pigmentation treatment in progress, photographed for Bella Beauty Brazil’s official service page.',
     width: 1170,
     height: 776,
+    category: 'Cosmetic Tattoo',
   },
   {
     src: '/images/home/work-brows.webp',
@@ -30,6 +32,7 @@ export const HOME_WORK_PHOTOS: HomePhoto[] = [
     alt: 'Close-up of a face with defined brows and closed eyes in Bella Beauty Brazil’s published brows imagery.',
     width: 988,
     height: 761,
+    category: 'Brows',
   },
   {
     src: '/images/home/work-lashes.webp',
@@ -37,6 +40,7 @@ export const HOME_WORK_PHOTOS: HomePhoto[] = [
     alt: 'Close-up of an eye with defined lashes in Bella Beauty Brazil’s published lashes imagery.',
     width: 1027,
     height: 1384,
+    category: 'Lashes',
   },
   {
     src: '/images/home/work-facial.webp',
@@ -44,6 +48,7 @@ export const HOME_WORK_PHOTOS: HomePhoto[] = [
     alt: 'Black-gloved hands holding a facial treatment kit, photographed for the official Bella Beauty Brazil website.',
     width: 522,
     height: 789,
+    category: 'Skin',
   },
   {
     src: '/images/home/work-studio.webp',
@@ -51,6 +56,7 @@ export const HOME_WORK_PHOTOS: HomePhoto[] = [
     alt: 'Livia preparing a beauty treatment at work in a studio, in a photograph published by Bella Beauty Brazil.',
     width: 516,
     height: 653,
+    category: 'Studio',
   },
 ];
 

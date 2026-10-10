@@ -9,6 +9,7 @@ import { GalleryReviewsPage } from './pages/GalleryReviewsPage';
 import { CoursesPage } from './pages/CoursesPage';
 import { LegalPage } from './pages/LegalPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { FloatingActions } from './components/FloatingActions';
 import { LEGACY_SERVICE_ALIASES, updateDocumentMetadata } from './data/routes';
 import { STUDIO_INFO } from './data/siteData';
 
@@ -45,7 +46,7 @@ export default function App({ initialPath }: AppProps = {}) {
     if (normalized === '/') return <HomePage onNavigate={navigate} onOpenBooking={openBooking} />;
     if (normalized === '/about' || normalized === '/studio') return <AboutPage onOpenBooking={openBooking} onNavigate={navigate} />;
     if (normalized === '/gallery-reviews' || normalized === '/gallery' || normalized === '/testimonials') return <GalleryReviewsPage onNavigate={navigate} onOpenBooking={openBooking} />;
-    if (normalized === '/courses') return <CoursesPage onNavigate={navigate} onOpenBooking={openBooking} />;
+    if (normalized === '/courses' || normalized === '/services/training-courses') return <CoursesPage onNavigate={navigate} onOpenBooking={openBooking} />;
     if (normalized === '/contact' || normalized === '/booking') return <ContactPage onOpenBooking={openBooking} />;
 
     if (normalized.startsWith('/services/')) {
@@ -65,6 +66,7 @@ export default function App({ initialPath }: AppProps = {}) {
       <Navbar currentPath={currentPath} onNavigate={navigate} onOpenBooking={openBooking} />
       <main className="flex-1 w-full">{renderPage()}</main>
       <Footer onNavigate={navigate} />
+      <FloatingActions />
     </div>
   );
 }

@@ -27,19 +27,22 @@ export const LEGACY_SERVICE_ALIASES: Record<string, string> = {
   'skin-waxing-care': 'waxing',
 };
 
-const serviceRoutes: SiteRoute[] = SERVICE_PAGES.map((service) => ({
+const serviceRoutes: SiteRoute[] = SERVICE_PAGES.filter((service) => service.slug !== 'training-courses').map((service) => ({
   path: `/services/${service.slug}`,
   title: `${service.title} | Bella Beauty Brazil, Greenslopes`,
   description: `${service.subtitle} Read service information, technique comparisons, official aftercare and FAQs from Bella Beauty Brazil in Greenslopes, Brisbane.`,
 }));
 
-const legacyRoutes: SiteRoute[] = Object.entries(LEGACY_SERVICE_ALIASES).map(([oldSlug, newSlug]) => ({
+const legacyRoutes: SiteRoute[] = [
+  ...Object.entries(LEGACY_SERVICE_ALIASES).map(([oldSlug, newSlug]) => ({
   path: `/services/${oldSlug}`,
   title: `Service information | Bella Beauty Brazil`,
   description: 'This previously indexed Bella Beauty Brazil service URL remains available and points to the relevant current service information.',
   canonicalPath: `/services/${newSlug}`,
   noindex: true,
-}));
+  })),
+  { path: '/services/training-courses', title: 'Training & Courses | Bella Beauty Brazil', description: 'Course information and current offers are listed on the Bella Beauty Brazil Courses page.', canonicalPath: '/courses', noindex: true },
+];
 
 export const SITE_ROUTES: SiteRoute[] = [...coreRoutes, ...serviceRoutes, ...legacyRoutes, { path: '/booking', title: 'Contact & Book | Bella Beauty Brazil', description: 'Open the official Bella Beauty Brazil booking page and contact the Greenslopes studio.', canonicalPath: '/contact', noindex: true }];
 
@@ -108,7 +111,7 @@ export const businessStructuredData = {
   },
   areaServed: STUDIO_INFO.serviceAreas.map((name) => ({ '@type': 'Place', name })),
   sameAs: [STUDIO_INFO.instagram, STUDIO_INFO.facebook],
-  makesOffer: SERVICE_PAGES.map((service) => ({
+  makesOffer: SERVICE_PAGES.filter((service) => service.slug !== 'training-courses').map((service) => ({
     '@type': 'Offer',
     itemOffered: { '@type': 'Service', name: service.title, serviceType: service.category },
     url: `${SITE_ORIGIN}/services/${service.slug}`,

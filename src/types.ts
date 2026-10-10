@@ -12,6 +12,12 @@ export interface TechniqueComparison {
   description: string;
 }
 
+export interface PriceOption {
+  label: string;
+  amount: number;
+  duration?: string;
+}
+
 export interface ServicePageData {
   slug: string;
   title: string;
@@ -20,6 +26,7 @@ export interface ServicePageData {
   intro: string;
   heroImage: string;
   galleryImages: string[];
+  priceOptions?: PriceOption[];
   comparisonTitle: string;
   comparisonIntro: string;
   techniques: TechniqueComparison[];

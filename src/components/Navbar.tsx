@@ -8,6 +8,8 @@ interface NavbarProps {
   onOpenBooking: () => void;
 }
 
+const SERVICE_CATEGORIES = ['Cosmetic Tattooing', 'Brows', 'Lashes', 'Facials', 'Waxing'] as const;
+
 export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, onOpenBooking }) => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -35,13 +37,18 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, onOpenB
             {servicesOpen && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-72 z-50">
                 <div className="bg-[#2b1b20] border border-[#704951]/50 rounded-2xl p-2 shadow-2xl max-h-[70vh] overflow-y-auto">
-                  {SERVICE_PAGES.map((service) => (
-                    <button key={service.slug} onClick={() => handleLinkClick(`/services/${service.slug}`)} className="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-[#372629] transition-colors flex items-center justify-between group">
-                      <span className="text-sm font-serif-editorial text-[#fff8f6] group-hover:text-[#d6929e]">{service.title}</span>
-                      <ArrowUpRight size={13} className="text-[#f0bcc7]/70" />
-                    </button>
-                  ))}
-                  <button onClick={() => handleLinkClick('/courses')} className="w-full text-left px-3.5 py-2.5 rounded-xl border-t border-[#704951]/35 mt-1 text-sm font-serif-editorial text-[#fff8f6] hover:text-[#d6929e]">Courses information</button>
+                  {SERVICE_CATEGORIES.map((category) => {
+                    const services = SERVICE_PAGES.filter((service) => service.category === category);
+                    if (!services.length) return null;
+                    return <div key={category} className="pb-1">
+                      <h3 className="px-3.5 pt-2.5 pb-1 text-[9px] font-sans-ui font-semibold uppercase tracking-[0.18em] text-[#f0bcc7]/75">{category}</h3>
+                      {services.map((service) => <button key={service.slug} onClick={() => handleLinkClick(`/services/${service.slug}`)} className="w-full text-left px-3.5 py-2 rounded-xl hover:bg-[#372629] transition-colors flex items-center justify-between group">
+                        <span className="text-sm font-serif-editorial text-[#fff8f6] group-hover:text-[#d6929e]">{service.title}</span>
+                        <ArrowUpRight size={13} className="text-[#f0bcc7]/70" />
+                      </button>)}
+                    </div>;
+                  })}
+                  <button onClick={() => handleLinkClick('/courses')} className="w-full text-left px-3.5 py-2.5 rounded-xl border-t border-[#704951]/35 mt-1 text-sm font-serif-editorial text-[#fff8f6] hover:text-[#d6929e]">Courses</button>
                 </div>
               </div>
             )}
@@ -72,9 +79,16 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, onOpenB
             <button onClick={() => handleLinkClick('/gallery-reviews')} className="text-left py-3 font-serif-editorial text-xl text-[#fff8f6] hover:text-[#d6929e]">Gallery & Reviews</button>
             <div className="py-3 border-y border-[#704951]/35">
               <span className="text-[10px] tracking-widest uppercase text-[#f0bcc7] font-sans-ui">Services</span>
-              <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-x-4">
-                {SERVICE_PAGES.map((service) => <button key={service.slug} onClick={() => handleLinkClick(`/services/${service.slug}`)} className="w-full text-left py-2 text-sm font-sans-ui text-[#fff8f6]/90 hover:text-[#d6929e]">{service.title}</button>)}
-              </div>
+              {SERVICE_CATEGORIES.map((category) => {
+                const services = SERVICE_PAGES.filter((service) => service.category === category);
+                if (!services.length) return null;
+                return <div key={category} className="mt-3">
+                  <h3 className="text-[9px] uppercase tracking-[0.16em] text-[#f0bcc7]/75 font-sans-ui">{category}</h3>
+                  <div className="mt-1 grid grid-cols-1 sm:grid-cols-2 gap-x-4">
+                    {services.map((service) => <button key={service.slug} onClick={() => handleLinkClick(`/services/${service.slug}`)} className="w-full text-left py-2 text-sm font-sans-ui text-[#fff8f6]/90 hover:text-[#d6929e]">{service.title}</button>)}
+                  </div>
+                </div>;
+              })}
             </div>
             <button onClick={() => handleLinkClick('/courses')} className="text-left py-3 font-serif-editorial text-xl text-[#fff8f6] hover:text-[#d6929e]">Courses</button>
             <button onClick={() => handleLinkClick('/contact')} className="text-left py-3 font-serif-editorial text-xl text-[#fff8f6] hover:text-[#d6929e]">Contact & Book</button>
