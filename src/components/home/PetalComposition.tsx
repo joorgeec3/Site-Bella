@@ -7,7 +7,7 @@ interface PetalCompositionProps {
 
 export const PetalComposition: React.FC<PetalCompositionProps> = ({ onNavigate }) => {
   return (
-    <section className="relative w-full bg-[#f2f0e5] text-[#261511] py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-10 overflow-hidden">
+    <section className="relative w-full bg-[#fff8f6] text-[#372629] py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-10 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Desktop / Tablet Organic Asymmetric Staggered Composition */}
         <div className="relative min-h-[720px] md:min-h-[820px] hidden md:flex items-center justify-center">
@@ -16,8 +16,8 @@ export const PetalComposition: React.FC<PetalCompositionProps> = ({ onNavigate }
             <PetalCard
               title="Signature Nail&#10;Services"
               description="Long-lasting,&#10;refined nail care"
-              bg="#261511"
-              textColor="#dddcb0"
+              bg="#372629"
+              textColor="#f0bcc7"
               onClick={() => {
                 onNavigate('/services/signature-nails');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -31,8 +31,8 @@ export const PetalComposition: React.FC<PetalCompositionProps> = ({ onNavigate }
               title="Brow & Lash&#10;Studio"
               description="Defined brows,&#10;effortlessly enhanced"
               price="€35"
-              bg="#261511"
-              textColor="#dddcb0"
+              bg="#372629"
+              textColor="#f0bcc7"
               onClick={() => {
                 onNavigate('/services/brow-lash');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -46,8 +46,8 @@ export const PetalComposition: React.FC<PetalCompositionProps> = ({ onNavigate }
               title="Body Rituals"
               description="Relaxation designed&#10;around you"
               price="€60"
-              bg="#261511"
-              textColor="#dddcb0"
+              bg="#372629"
+              textColor="#f0bcc7"
               onClick={() => {
                 onNavigate('/services/body-and-wellness');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -61,8 +61,8 @@ export const PetalComposition: React.FC<PetalCompositionProps> = ({ onNavigate }
               title="Wellness&#10;Escape"
               description="Time reserved&#10;entirely for you"
               price="€55"
-              bg="#261511"
-              textColor="#dddcb0"
+              bg="#372629"
+              textColor="#f0bcc7"
               onClick={() => {
                 onNavigate('/services/body-and-wellness');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -77,31 +77,31 @@ export const PetalComposition: React.FC<PetalCompositionProps> = ({ onNavigate }
             title="Brow & Lash&#10;Studio"
             description="Defined brows,&#10;effortlessly enhanced"
             price="€35"
-            bg="#261511"
-            textColor="#dddcb0"
+            bg="#372629"
+            textColor="#f0bcc7"
             onClick={() => onNavigate('/services/brow-lash')}
           />
           <PetalCard
             title="Signature Nail&#10;Services"
             description="Long-lasting,&#10;refined nail care"
-            bg="#261511"
-            textColor="#dddcb0"
+            bg="#372629"
+            textColor="#f0bcc7"
             onClick={() => onNavigate('/services/signature-nails')}
           />
           <PetalCard
             title="Body Rituals"
             description="Relaxation designed&#10;around you"
             price="€60"
-            bg="#261511"
-            textColor="#dddcb0"
+            bg="#372629"
+            textColor="#f0bcc7"
             onClick={() => onNavigate('/services/body-and-wellness')}
           />
           <PetalCard
             title="Wellness&#10;Escape"
             description="Time reserved&#10;entirely for you"
             price="€55"
-            bg="#261511"
-            textColor="#dddcb0"
+            bg="#372629"
+            textColor="#f0bcc7"
             onClick={() => onNavigate('/services/body-and-wellness')}
           />
         </div>

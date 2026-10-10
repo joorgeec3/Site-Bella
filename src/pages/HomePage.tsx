@@ -1,11 +1,14 @@
 import React from 'react';
 import { Hero } from '../components/home/Hero';
 import { OurArt } from '../components/home/OurArt';
+import { MeetLivia } from '../components/home/MeetLivia';
 import { OurServices } from '../components/home/OurServices';
 import { PetalCardsScrollScene } from '../components/home/PetalCardsScrollScene';
 import { BentoApproach } from '../components/home/BentoApproach';
+import { OurWork } from '../components/home/OurWork';
 import { ClientStories } from '../components/home/ClientStories';
 import { FAQ } from '../components/home/FAQ';
+import { FollowOurJourney } from '../components/home/FollowOurJourney';
 import { FinalCTA } from '../components/home/FinalCTA';
 
 interface HomePageProps {
@@ -19,28 +22,37 @@ export const HomePage: React.FC<HomePageProps> = ({
 }) => {
   return (
     <div className="w-full">
-      {/* 1 — Header & Hero (4s–6s) */}
+      {/* 1 — Header & Hero */}
       <Hero onOpenBooking={onOpenBooking} />
 
-      {/* 2 — Our Art (6s–9s) with asymmetric parallax */}
+      {/* 2 — Existing Our Art section */}
       <OurArt onNavigate={onNavigate} />
 
-      {/* 3 — Service Cards & Background Transition (9s–12s) */}
+      {/* New — official owner story and portrait */}
+      <MeetLivia onNavigate={onNavigate} />
+
+      {/* 3 — Existing four service cards and background transition */}
       <OurServices onNavigate={onNavigate} onOpenBooking={onOpenBooking} />
 
-      {/* 4 & 5 — Macro Body Photography, 5 Floating Floral Petal Cards & Center Split Reveal (12s–17.5s) */}
+      {/* 4 & 5 — Existing macro photo, five floral cards and split reveal */}
       <PetalCardsScrollScene onNavigate={onNavigate} />
 
-      {/* 6 — Our Approach & Bento Grid (17s–21s) */}
+      {/* 6 — Existing Our Approach and Bento Grid */}
       <BentoApproach onNavigate={onNavigate} />
 
-      {/* 7 — Client Stories (21s–23.5s) */}
+      {/* New — official-site photos with keyboard-operable lightbox */}
+      <OurWork onNavigate={onNavigate} />
+
+      {/* 7 — Existing client stories */}
       <ClientStories />
 
-      {/* 8 — FAQ with Hover Preview Thumbnails (23.5s–25.5s) */}
+      {/* 8 — Existing FAQ */}
       <FAQ />
 
-      {/* 9 — Final CTA (25.5s–28s) */}
+      {/* New — no live/fabricated Instagram feed; profile link and official-site photos */}
+      <FollowOurJourney />
+
+      {/* 9 — Existing final CTA */}
       <FinalCTA onOpenBooking={onOpenBooking} />
     </div>
   );

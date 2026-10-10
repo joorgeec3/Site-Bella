@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronDown, Menu, X, Calendar } from 'lucide-react';
-import { SERVICES } from '../data/siteData';
-import { OriaPetalIcon } from './PetalShape';
+import React, { useState } from 'react';
+import { ChevronDown, Menu, X, Calendar, ArrowUpRight } from 'lucide-react';
+import { SERVICE_PAGES, STUDIO_INFO } from '../data/siteData';
 
 interface NavbarProps {
   currentPath: string;
@@ -9,26 +8,11 @@ interface NavbarProps {
   onOpenBooking: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({
-  currentPath,
-  onNavigate,
-  onOpenBooking,
-}) => {
-  const [isScrolled, setIsScrolled] = useState(false);
+const SERVICE_CATEGORIES = ['Cosmetic Tattooing', 'Brows', 'Lashes', 'Facials', 'Waxing'] as const;
+
+export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, onOpenBooking }) => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleLinkClick = (path: string) => {
     onNavigate(path);
@@ -38,184 +22,78 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 pointer-events-none px-3 sm:px-6 pt-3 sm:pt-4`}
-    >
-      <div
-        className={`max-w-6xl mx-auto rounded-full px-5 sm:px-7 py-2.5 sm:py-3 flex items-center justify-between transition-all duration-300 pointer-events-auto ${
-          isScrolled
-            ? 'bg-[#261511]/90 backdrop-blur-xl border border-[#543923]/40 shadow-2xl shadow-black/30'
-            : 'bg-[#261511]/70 backdrop-blur-md border border-[#543923]/25'
-        }`}
-      >
-        {/* Left: Brand Logo */}
-        <button
-          onClick={() => handleLinkClick('/')}
-          className="flex items-center gap-2.5 group text-left cursor-pointer focus:outline-none"
-        >
-          <div className="w-5 h-5 flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
-            <OriaPetalIcon size={17} color="#f2f0e5" />
-          </div>
-          <span className="font-serif-editorial text-2xl sm:text-[25px] tracking-tight text-[#f2f0e5] font-normal lowercase">
-            oria
-          </span>
+    <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-6 pt-3 sm:pt-4 pointer-events-none">
+      <div className="max-w-6xl mx-auto rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between bg-[#372629]/90 backdrop-blur-xl border border-[#704951]/45 shadow-2xl shadow-black/20 pointer-events-auto">
+        <button onClick={() => handleLinkClick('/')} className="flex items-center gap-2.5 text-left cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d6929e]" aria-label="Bella Beauty Brazil home">
+          <img src={STUDIO_INFO.logo} alt="" width="28" height="32" className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full bg-[#fff8f6] p-1 object-contain" />
+          <span className="font-serif-editorial text-lg sm:text-xl tracking-tight text-[#fff8f6] leading-none">Bella Beauty <span className="text-[#f0bcc7]">Brazil</span></span>
         </button>
 
-        {/* Center: Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8 text-[13px] tracking-widest uppercase font-sans-ui">
-          {/* Services Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
-          >
-            <button
-              onClick={() => setServicesOpen(!servicesOpen)}
-              className="flex items-center gap-1.5 py-1 text-[#f2f0e5]/80 hover:text-[#f2f0e5] transition-colors focus:outline-none cursor-pointer"
-            >
-              <span className={currentPath.startsWith('/services') ? 'text-[#ffd9a8]' : ''}>
-                Services
-              </span>
-              <ChevronDown
-                size={14}
-                className={`transition-transform duration-200 ${
-                  servicesOpen ? 'rotate-180 text-[#ffd9a8]' : 'opacity-70'
-                }`}
-              />
+        <nav className="hidden lg:flex items-center gap-6 text-[11px] tracking-[0.13em] uppercase font-sans-ui" aria-label="Main navigation">
+          <div className="relative" onMouseEnter={() => setServicesOpen(true)} onMouseLeave={() => setServicesOpen(false)}>
+            <button onClick={() => setServicesOpen(true)} aria-expanded={servicesOpen} className={`flex items-center gap-1.5 py-2 transition-colors hover:text-[#d6929e] ${currentPath.startsWith('/services') ? 'text-[#d6929e]' : 'text-[#fff8f6]/85'}`}>
+              Services <ChevronDown size={13} className={`transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
             </button>
-
-            {/* Dropdown Menu */}
             {servicesOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-64 z-50 animate-in fade-in zoom-in-95 duration-150">
-                <div className="bg-[#1e100d] border border-[#543923]/40 rounded-2xl p-2.5 shadow-2xl backdrop-blur-xl">
-                  {SERVICES.map((s) => (
-                    <button
-                      key={s.id}
-                      onClick={() => handleLinkClick(`/services/${s.slug}`)}
-                      className="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-[#2e1814] transition-colors flex items-center justify-between group cursor-pointer"
-                    >
-                      <div>
-                        <div className="text-xs font-serif-editorial text-sm tracking-normal text-[#f2f0e5] group-hover:text-[#ffd9a8]">
-                          {s.title}
-                        </div>
-                        <div className="text-[10px] text-[#f2f0e5]/50 tracking-normal normal-case">
-                          {s.startingPrice}
-                        </div>
-                      </div>
-                      <span className="text-[10px] text-[#dddcb0]/70 font-mono">
-                        {s.number}
-                      </span>
-                    </button>
-                  ))}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-72 z-50">
+                <div className="bg-[#2b1b20] border border-[#704951]/50 rounded-2xl p-2 shadow-2xl max-h-[70vh] overflow-y-auto">
+                  {SERVICE_CATEGORIES.map((category) => {
+                    const services = SERVICE_PAGES.filter((service) => service.category === category);
+                    if (!services.length) return null;
+                    return <div key={category} className="pb-1">
+                      <h3 className="px-3.5 pt-2.5 pb-1 text-[9px] font-sans-ui font-semibold uppercase tracking-[0.18em] text-[#f0bcc7]/75">{category}</h3>
+                      {services.map((service) => <button key={service.slug} onClick={() => handleLinkClick(`/services/${service.slug}`)} className="w-full text-left px-3.5 py-2 rounded-xl hover:bg-[#372629] transition-colors flex items-center justify-between group">
+                        <span className="text-sm font-serif-editorial text-[#fff8f6] group-hover:text-[#d6929e]">{service.title}</span>
+                        <ArrowUpRight size={13} className="text-[#f0bcc7]/70" />
+                      </button>)}
+                    </div>;
+                  })}
+                  <button onClick={() => handleLinkClick('/courses')} className="w-full text-left px-3.5 py-2.5 rounded-xl border-t border-[#704951]/35 mt-1 text-sm font-serif-editorial text-[#fff8f6] hover:text-[#d6929e]">Courses</button>
                 </div>
               </div>
             )}
           </div>
-
-          {/* Studio Link */}
-          <button
-            onClick={() => handleLinkClick('/about')}
-            className={`py-1 text-[#f2f0e5]/80 hover:text-[#f2f0e5] transition-colors cursor-pointer ${
-              currentPath === '/about' ? 'text-[#ffd9a8] font-medium' : ''
-            }`}
-          >
-            Studio
-          </button>
-
-          {/* Contact Link */}
-          <button
-            onClick={() => handleLinkClick('/contact')}
-            className={`py-1 text-[#f2f0e5]/80 hover:text-[#f2f0e5] transition-colors cursor-pointer ${
-              currentPath === '/contact' ? 'text-[#ffd9a8] font-medium' : ''
-            }`}
-          >
-            Contact
-          </button>
+          <button onClick={() => handleLinkClick('/about')} className="text-[#fff8f6]/85 hover:text-[#d6929e] transition-colors">About Me</button>
+          <button onClick={() => handleLinkClick('/gallery-reviews')} className="text-[#fff8f6]/85 hover:text-[#d6929e] transition-colors">Gallery & Reviews</button>
+          <button onClick={() => handleLinkClick('/contact')} className="text-[#fff8f6]/85 hover:text-[#d6929e] transition-colors">Contact</button>
         </nav>
 
-        {/* Right: Book Now Pill Button */}
         <div className="hidden sm:flex items-center">
-          <button
-            onClick={onOpenBooking}
-            className="group relative inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#f2f0e5] text-[#261511] font-sans-ui text-xs font-medium tracking-wide transition-all duration-300 hover:bg-[#ffd9a8] hover:shadow-lg active:scale-95 cursor-pointer"
-          >
-            <div className="w-4 h-4 rounded-full border border-[#261511]/30 flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
-              <Calendar size={9} className="text-[#261511]" />
-            </div>
-            <span>Book Now</span>
+          <button onClick={onOpenBooking} className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#fff8f6] text-[#372629] font-sans-ui text-[11px] font-semibold tracking-wide transition-all hover:bg-[#f0bcc7] active:scale-95">
+            <Calendar size={13} /><span>Book Now</span>
           </button>
         </div>
 
-        {/* Mobile Hamburger Button */}
-        <div className="flex md:hidden items-center gap-3">
-          <button
-            onClick={onOpenBooking}
-            className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-[#f2f0e5] text-[#261511] font-sans-ui text-xs font-medium tracking-wide"
-          >
-            Book Now
-          </button>
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="w-9 h-9 rounded-full border border-[#543923]/60 flex items-center justify-center text-[#f2f0e5] hover:bg-[#543923]/30 transition-colors"
-            aria-label="Toggle mobile menu"
-          >
+        <div className="flex lg:hidden items-center gap-2">
+          <button onClick={onOpenBooking} className="sm:hidden inline-flex items-center px-3.5 py-1.5 rounded-full bg-[#fff8f6] text-[#372629] font-sans-ui text-[11px] font-semibold">Book</button>
+          <button onClick={() => setMobileMenuOpen((open) => !open)} className="w-9 h-9 rounded-full border border-[#704951]/60 flex items-center justify-center text-[#fff8f6] hover:bg-[#704951]/30 transition-colors" aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileMenuOpen}>
             {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden pointer-events-auto fixed inset-x-4 top-[72px] bg-[#22120e] border border-[#543923]/40 rounded-3xl p-6 shadow-2xl animate-in slide-in-from-top-4 duration-200">
-          <nav className="flex flex-col space-y-4">
-            <div className="pb-2 border-b border-[#543923]/30">
-              <span className="text-[10px] tracking-widest uppercase text-[#dddcb0]/70 font-sans-ui">
-                Services
-              </span>
-              <div className="mt-2 space-y-2 pl-2">
-                {SERVICES.map((s) => (
-                  <button
-                    key={s.id}
-                    onClick={() => handleLinkClick(`/services/${s.slug}`)}
-                    className="w-full text-left py-1 text-sm font-serif-editorial text-[#f2f0e5] hover:text-[#ffd9a8] flex items-center justify-between"
-                  >
-                    <span>{s.title}</span>
-                    <span className="text-xs text-[#dddcb0]/70 font-sans-ui font-mono">
-                      {s.startingPrice}
-                    </span>
-                  </button>
-                ))}
-              </div>
+        <div className="lg:hidden pointer-events-auto fixed inset-x-3 sm:inset-x-6 top-[68px] bg-[#2b1b20] border border-[#704951]/50 rounded-3xl p-5 shadow-2xl max-h-[calc(100vh-84px)] overflow-y-auto">
+          <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
+            <button onClick={() => handleLinkClick('/about')} className="text-left py-3 font-serif-editorial text-xl text-[#fff8f6] hover:text-[#d6929e]">About Me</button>
+            <button onClick={() => handleLinkClick('/gallery-reviews')} className="text-left py-3 font-serif-editorial text-xl text-[#fff8f6] hover:text-[#d6929e]">Gallery & Reviews</button>
+            <div className="py-3 border-y border-[#704951]/35">
+              <span className="text-[10px] tracking-widest uppercase text-[#f0bcc7] font-sans-ui">Services</span>
+              {SERVICE_CATEGORIES.map((category) => {
+                const services = SERVICE_PAGES.filter((service) => service.category === category);
+                if (!services.length) return null;
+                return <div key={category} className="mt-3">
+                  <h3 className="text-[9px] uppercase tracking-[0.16em] text-[#f0bcc7]/75 font-sans-ui">{category}</h3>
+                  <div className="mt-1 grid grid-cols-1 sm:grid-cols-2 gap-x-4">
+                    {services.map((service) => <button key={service.slug} onClick={() => handleLinkClick(`/services/${service.slug}`)} className="w-full text-left py-2 text-sm font-sans-ui text-[#fff8f6]/90 hover:text-[#d6929e]">{service.title}</button>)}
+                  </div>
+                </div>;
+              })}
             </div>
-
-            <button
-              onClick={() => handleLinkClick('/about')}
-              className="text-left py-2 font-serif-editorial text-xl text-[#f2f0e5] hover:text-[#ffd9a8]"
-            >
-              Studio (About)
-            </button>
-
-            <button
-              onClick={() => handleLinkClick('/contact')}
-              className="text-left py-2 font-serif-editorial text-xl text-[#f2f0e5] hover:text-[#ffd9a8]"
-            >
-              Contact & Booking
-            </button>
-
-            <div className="pt-4 border-t border-[#543923]/40 flex flex-col gap-3">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenBooking();
-                }}
-                className="w-full py-3 rounded-full bg-[#ffd9a8] text-[#261511] font-sans-ui text-xs font-semibold tracking-wider uppercase text-center"
-              >
-                Book Your Session
-              </button>
-              <div className="text-center text-[11px] text-[#f2f0e5]/50 font-sans-ui">
-                Open Mon — Sat 10:00 — 20:00
-              </div>
-            </div>
+            <button onClick={() => handleLinkClick('/courses')} className="text-left py-3 font-serif-editorial text-xl text-[#fff8f6] hover:text-[#d6929e]">Courses</button>
+            <button onClick={() => handleLinkClick('/contact')} className="text-left py-3 font-serif-editorial text-xl text-[#fff8f6] hover:text-[#d6929e]">Contact & Book</button>
+            <button onClick={() => { setMobileMenuOpen(false); onOpenBooking(); }} className="mt-3 w-full py-3 rounded-full bg-[#d6929e] text-[#372629] font-sans-ui text-xs font-semibold tracking-wider uppercase">Book on Timely</button>
+            <p className="pt-3 text-center text-[11px] text-[#fff8f6]/65 font-sans-ui">Greenslopes · Brisbane, QLD</p>
           </nav>
         </div>
       )}

@@ -1,0 +1,23 @@
+import React from 'react';
+import { ExternalLink, ArrowRight } from 'lucide-react';
+import { SERVICE_PAGES, STUDIO_INFO, TESTIMONIALS } from '../data/siteData';
+
+interface GalleryReviewsPageProps { onNavigate: (path: string) => void; onOpenBooking: () => void; }
+
+export const GalleryReviewsPage: React.FC<GalleryReviewsPageProps> = ({ onNavigate, onOpenBooking }) => {
+  const galleryByUrl = new Map<string, { src: string; label: string }>();
+  SERVICE_PAGES.forEach((service) => service.galleryImages.forEach((src) => {
+    if (!galleryByUrl.has(src)) galleryByUrl.set(src, { src, label: service.title });
+  }));
+  const officialImages = Array.from(galleryByUrl.values()).slice(0, 12);
+  const publishedReview = TESTIMONIALS.find((item) => item.cardType === 'review');
+  return (
+    <div className="w-full bg-[#372629] text-[#fff8f6] pt-24 sm:pt-28 pb-20">
+      <header className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 pt-12 pb-14 sm:pb-20 text-center"><span className="text-xs sm:text-sm font-sans-ui tracking-wider text-[#f0bcc7]/85 block mb-3">(Gallery & Reviews)</span><h1 className="font-serif-editorial text-5xl sm:text-7xl md:text-8xl tracking-tight">A closer look at Bella</h1><p className="font-sans-ui text-sm sm:text-base text-[#fff8f6]/75 max-w-2xl mx-auto mt-5 leading-relaxed">Official Bella Beauty Brazil website photographs and a client review published on the studio’s own site. Template imagery is not labelled as client work.</p></header>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10" aria-label="Bella Beauty Brazil official photographs"><div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">{officialImages.map((photo, index) => <figure key={`${photo.src}-${index}`} className={`relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#704951]/35 shadow-xl ${index % 5 === 0 ? 'aspect-[3/4]' : 'aspect-[4/5]'}`}><img src={photo.src} alt={`Photo on the official Bella Beauty Brazil website — ${photo.label}`} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading={index < 4 ? 'eager' : 'lazy'} /><figcaption className="absolute bottom-3 left-3 right-3 text-[10px] sm:text-xs font-sans-ui text-[#fff8f6] bg-[#372629]/70 backdrop-blur-sm rounded-full px-3 py-1.5">{photo.label}</figcaption></figure>)}</div></section>
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 py-20 sm:py-28"><div className="text-center mb-10"><span className="text-xs font-sans-ui tracking-wider uppercase text-[#f0bcc7]/80">(Published client review)</span><h2 className="font-serif-editorial text-3xl sm:text-5xl mt-3">Words from a client</h2></div>{publishedReview && <figure className="rounded-3xl bg-[#fff8f6] text-[#372629] p-8 sm:p-12 shadow-2xl"><blockquote className="font-serif-editorial text-2xl sm:text-3xl leading-relaxed">“{publishedReview.quote}”</blockquote><figcaption className="mt-8 pt-5 border-t border-[#372629]/15 flex flex-wrap items-center justify-between gap-3"><span className="font-sans-ui text-sm font-semibold">{publishedReview.author}</span><a href={publishedReview.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs font-sans-ui underline underline-offset-4">Published on Bella Beauty Brazil’s official website <ExternalLink size={13} /></a></figcaption></figure>}<p className="text-center text-xs font-sans-ui text-[#fff8f6]/60 mt-5">No aggregate star rating is shown because none was verified for the studio.</p></section>
+      <section className="bg-[#f0bcc7] text-[#372629] py-14 px-4 sm:px-6"><div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6"><div><h2 className="font-serif-editorial text-3xl sm:text-4xl">Explore a service</h2><p className="font-sans-ui text-sm mt-2 text-[#372629]/75">Read detailed service information before using Timely.</p></div><button onClick={() => onNavigate('/services/nano-strokes')} className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#372629] text-[#fff8f6] text-xs font-sans-ui uppercase tracking-wider">View service details <ArrowRight size={14} /></button><a href={STUDIO_INFO.instagram} target="_blank" rel="noreferrer" className="hidden sm:inline-flex items-center gap-2 text-xs font-sans-ui underline underline-offset-4">Instagram <ExternalLink size={13} /></a></div></section>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 pt-12 text-center"><button onClick={onOpenBooking} className="px-8 py-3.5 rounded-full bg-[#fff8f6] text-[#372629] font-sans-ui text-xs font-semibold uppercase tracking-widest hover:bg-[#d6929e]">Book on Timely</button></div>
+    </div>
+  );
+};
