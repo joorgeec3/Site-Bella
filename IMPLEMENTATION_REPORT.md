@@ -43,7 +43,7 @@
 
 1. **Publicação e merge** não foram feitos. O preview atual é temporário: [abrir preview do sandbox](https://4173-i9xja1dwu9rc65jer456m-96609d97.us1.manus.computer/).
 2. **301**: os aliases e canonicals antigos foram mantidos para o build, mas não existe regra do servidor aplicada enquanto o host de produção não for definido.
-3. **Performance**: o build gera CSS de 58,35 KB (~10,13 KB gzip) e JavaScript de 575,18 KB minificado (~180,32 KB gzip). Vite ainda avisa que o chunk JS ultrapassa 500 KB bruto. A compilação é válida; divisão adicional por rota pode ser considerada antes de produção.
+3. **Performance**: no build atual, CSS mede 63,44 KB (~11,00 KB gzip) e JavaScript 587,29 KB minificado (~183,12 KB gzip). Vite ainda avisa que o chunk JS ultrapassa 500 KB bruto. A compilação é válida; divisão adicional por rota pode ser considerada antes de produção.
 4. Não foi executado Lighthouse nem uma auditoria dedicada de screen reader/WCAG. Os testes de responsividade, foco visível e `prefers-reduced-motion` não substituem essa etapa.
 5. Não há preços, horários, certificações ou detalhes curriculares inventados. Confirmar esses dados diretamente com a empresa antes de eventualmente publicá-los.
 
@@ -54,3 +54,16 @@
 - [Guia oficial de cuidados pós-tratamento](https://www.bellabeautybrazil.com.au/_files/ugd/26620d_2df1062d732e44f2af7e3ce4284b53dd.pdf)
 - [Referência de layout/rotação visual](https://oriatemplate.framer.website/)
 - Mais detalhes e limites das fontes: [`CONTENT_SOURCES.md`](./CONTENT_SOURCES.md)
+
+
+## Iteração incremental da homepage — 2026-10-10
+
+- Foram acrescentadas somente três seções à sequência existente: **Meet Livia** (retrato oficial e história pública, CTA More About Livia), **Our Work** (grid assimétrico de cinco fotos com lightbox) e **Follow Our Journey** (fotos do site e ligação ao perfil). A ordem e o conteúdo das demais seções foram mantidos.
+- Nove imagens publicadas na CDN oficial foram otimizadas para WebP sem corte, com proporções originais. O conjunto passou de **13.598.855 bytes** de fontes baixadas para **485.824 bytes** (redução calculada: **96,43%**). Incluem o retrato de Livia, cinco imagens distintas do grid e três imagens distintas do bloco Instagram; todas carregaram, têm texto alternativo e não se repetem entre os novos blocos.
+- A história do bloco Meet Livia é limitada ao percurso indicado pelo site oficial e pelo briefing: vendas de cargas aéreas/comércio exterior no Brasil, chegada à Austrália e trabalho posterior no setor da beleza. Nenhuma formação ou certificação foi acrescentada.
+- **Instagram:** a visita automatizada ao perfil redirecionou para login. Seguindo o fallback solicitado, usei três imagens adicionais do site oficial e um link direto para `@bellabeautybrazil`; nenhum post, data, legenda ou feed ao vivo foi criado.
+- **Lightbox:** foto abre; avançar altera a foto; Escape fecha; o foco retorna ao cartão de origem; o scroll da página é restaurado.
+- **Regressão da cena:** depois de mover o scroll scene no layout ampliado, medi uma pétala visível em cada um dos cinco intervalos amostrados. O mesmo centro foi observado ao voltar ao ponto anterior do scroll; o polígono da faixa e a revelação do título permaneceram simétricos. Com `prefers-reduced-motion`, a seção usa apenas a altura de viewport (844 px no teste), sem trecho sticky de 500vh.
+- **Rotas/CTAs:** More About Livia abriu `/about`; More Gallery & Reviews abriu `/gallery-reviews`; o botão Instagram aponta ao perfil oficial em nova aba com `noopener`.
+- **Responsive e execução:** o menu mobile abriu e fechou; as cinco larguras de teste (320, 390, 768, 1024 e 1280 px) não mostraram overflow; as nove fotos decodificaram; o console JavaScript não registrou erros. Preview público temporário respondeu HTTP 200.
+- A prévia continua **sem publicação em produção** e a branch de revisão do GitHub permanece em draft. Os limites de deployment/301, Lighthouse/WCAG e code splitting descritos acima continuam pendentes.

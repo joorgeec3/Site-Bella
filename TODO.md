@@ -27,3 +27,20 @@ Edição do projeto importado existente, sem substituir o template. A homepage, 
 
 ## Restrições de conteúdo preservadas
 Sem inventar preços, horários, rating, certificações, resultados, calendário ou currículo de curso. Apenas a avaliação publicada e atribuída de Alisha foi usada como avaliação textual; as demais imagens do slider não são rotuladas como reviews.
+
+
+## Iteração incremental — seção Meet Livia, Our Work e Instagram (2026-10-10)
+
+- [x] Preservar todas as seções atuais e inserir somente três novas seções à homepage: Meet Livia, Our Work e Follow Our Journey.
+- [x] Exibir o retrato real de Livia publicado no site oficial; resumir sua passagem por vendas executivas de cargas aéreas/comércio exterior no Brasil, chegada à Austrália e transição para a beleza, sem credenciais inventadas.
+- [x] Ligar More About Livia à página About existente.
+- [x] Montar o grid editorial Our Work com cinco imagens distintas do site oficial e lightbox funcional: próximo/anterior, Escape, clique no backdrop, foco restaurado e scroll liberado ao fechar.
+- [x] Usar somente fotos efetivamente publicadas no site oficial; nove fontes visuais distintas entre as três seções, sem repetição interna, sem baixar imagens de banco de stock e sem gerar imagens. Preservar aspecto/enquadramento em WebP e fornecer `alt` descritivo.
+- [x] Verificar Instagram. Como o navegador redirecionou para login, usar fotografias diferentes do site oficial, botão Follow on Instagram para o perfil correto e texto que deixa claro que não é feed ao vivo; nenhum post/caption/data fictício.
+- [x] Passar `npm run lint` e `npm run build`; prerender continua gerando 22 rotas e sitemap.
+- [x] Verificar About e Gallery & Reviews por seus CTAs, o link Instagram, menu mobile abrir/fechar, lightbox com teclado, nove fotos decodificadas com alt, console sem erros e layout sem overflow a 320, 390, 768, 1024 e 1280 px.
+- [x] Regressar a cena ScrollTrigger após a inserção: cinco amostras revelaram uma pétala por vez, o ponto inicial reapareceu no retorno do scroll, clip-path expandiu simetricamente e reduced-motion dispensou a altura sticky de 500vh.
+- [x] Confirmar a prévia de produção do sandbox responde HTTP 200; screenshot das novas seções examinado no desktop e do grid no mobile.
+
+## Backup desta iteração
+Backup do repositório imediatamente antes das três adições: `/home/ubuntu/Site-Bella-backup-home-sections-20261010-1218.tar.gz` (205 KB; `.git`, `node_modules` e `dist` excluídos). Backup anterior à primeira iteração: `/home/ubuntu/Site-Bella-backup-20261010-142651.tar.gz` (148 KB).
