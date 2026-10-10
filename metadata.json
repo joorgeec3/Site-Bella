@@ -1,0 +1,6 @@
+{
+  "name": "Oria Beauty Studio",
+  "description": "Discover personalized beauty treatments designed around comfort, care and confidence. From nails and brows to skin and body rituals, every experience is thoughtfully tailored to you.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
